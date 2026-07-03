@@ -682,7 +682,7 @@ function LoginScreen({ onSelect }) {
                 fontWeight: 600,
               }}
             >
-              Lake County Fisheries Registry
+              County Fisheries Registry
             </span>
           </div>
 
