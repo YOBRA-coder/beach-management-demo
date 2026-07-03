@@ -42,7 +42,8 @@ const F_DISPLAY = "'Space Grotesk', sans-serif";
 const F_BODY = "'Inter', sans-serif";
 const F_MONO = "'IBM Plex Mono', monospace";
 
-const NET_BG = { backgroundImage: `repeating-linear-gradient(45deg, rgba(255,255,255,0.06) 0 1px, transparent 1px 14px), repeating-linear-gradient(-45deg, rgba(255,255,255,0.06) 0 1px, transparent 1px 14px)` };
+const NET_BG = { };
+//backgroundImage: `repeating-linear-gradient(45deg, rgba(255,255,255,0.06) 0 1px, transparent 1px 14px), repeating-linear-gradient(-45deg, rgba(255,255,255,0.06) 0 1px, transparent 1px 14px)`
 const qrUrl = (text, size=180) => `https://api.qrserver.com/v1/create-qr-code/?size=${size}x${size}&margin=8&color=0A2A3C&bgcolor=ffffff&data=${encodeURIComponent(text)}`;
 
 /* ============================== MOCK DATA ============================== */
