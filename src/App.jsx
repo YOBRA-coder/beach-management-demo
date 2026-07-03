@@ -627,7 +627,11 @@ function LoginScreen({ onSelect }) {
     <div
       style={{
         minHeight: "100vh",
-        background: "#0B2239",
+        background: `
+          radial-gradient(circle at top left, rgba(59,130,246,0.15), transparent 30%),
+          radial-gradient(circle at bottom right, rgba(245,158,11,0.12), transparent 30%),
+          linear-gradient(135deg, #071B2F 0%, #0C2D48 50%, #12385A 100%)
+        `,
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
@@ -637,34 +641,86 @@ function LoginScreen({ onSelect }) {
       <div
         style={{
           width: "100%",
-          maxWidth: "900px",
-          textAlign: "center",
+          maxWidth: "1000px",
         }}
       >
-        <h1
+        {/* Header */}
+        <div
           style={{
-            color: "#fff",
-            fontSize: "42px",
-            marginBottom: "12px",
+            textAlign: "center",
+            marginBottom: "50px",
           }}
         >
-          Lake County Fisheries Registry
-        </h1>
+          <div
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "12px",
+              marginBottom: "20px",
+            }}
+          >
+            <div
+              style={{
+                width: "50px",
+                height: "50px",
+                borderRadius: "14px",
+                background: "#F59E0B",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <Waves size={24} color="#071B2F" />
+            </div>
 
-        <p
-          style={{
-            color: "#B8D4E3",
-            marginBottom: "40px",
-          }}
-        >
-          Select a role to continue
-        </p>
+            <span
+              style={{
+                color: "#C7E5F5",
+                letterSpacing: "0.15em",
+                textTransform: "uppercase",
+                fontSize: "12px",
+                fontWeight: 600,
+              }}
+            >
+              Lake County Fisheries Registry
+            </span>
+          </div>
 
+          <h1
+            style={{
+              color: "#fff",
+              fontSize: "clamp(32px,5vw,54px)",
+              fontWeight: 700,
+              lineHeight: 1.15,
+              marginBottom: "16px",
+            }}
+          >
+            One platform for every fisher,
+            <br />
+            vessel, patrol and catch.
+          </h1>
+
+          <p
+            style={{
+              color: "#A9C7D8",
+              maxWidth: "650px",
+              margin: "0 auto",
+              lineHeight: 1.7,
+              fontSize: "15px",
+            }}
+          >
+            Manage fisher registration, vessel records, patrol operations,
+            membership verification, fisheries reporting and county-wide
+            compliance from a single modern platform.
+          </p>
+        </div>
+
+        {/* Role Cards */}
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit,minmax(180px,1fr))",
-            gap: "16px",
+            gridTemplateColumns: "repeat(auto-fit,minmax(200px,1fr))",
+            gap: "18px",
           }}
         >
           {ROLES.map((r) => (
@@ -672,21 +728,48 @@ function LoginScreen({ onSelect }) {
               key={r.name}
               onClick={() => onSelect(r.name)}
               style={{
-                padding: "20px",
-                borderRadius: "12px",
-                border: "1px solid #2A4A63",
-                background: "#13314D",
-                color: "#fff",
+                background: "#102C47",
+                border: "1px solid rgba(255,255,255,0.08)",
+                borderRadius: "18px",
+                padding: "24px",
+                textAlign: "left",
                 cursor: "pointer",
+                color: "#fff",
+                transition: "all 0.25s ease",
+                boxShadow: "0 10px 30px rgba(0,0,0,0.15)",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform =
+                  "translateY(-5px)";
+                e.currentTarget.style.borderColor =
+                  "rgba(245,158,11,0.4)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform =
+                  "translateY(0)";
+                e.currentTarget.style.borderColor =
+                  "rgba(255,255,255,0.08)";
               }}
             >
-              <div style={{ marginBottom: "10px" }}>
-                <r.icon size={24} />
+              <div
+                style={{
+                  width: "42px",
+                  height: "42px",
+                  borderRadius: "12px",
+                  background: "rgba(245,158,11,0.15)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  marginBottom: "18px",
+                }}
+              >
+                <r.icon size={20} color="#F59E0B" />
               </div>
 
               <div
                 style={{
-                  fontWeight: "bold",
+                  fontSize: "17px",
+                  fontWeight: 600,
                   marginBottom: "8px",
                 }}
               >
@@ -695,14 +778,44 @@ function LoginScreen({ onSelect }) {
 
               <div
                 style={{
-                  fontSize: "12px",
-                  opacity: 0.8,
+                  color: "#A9C7D8",
+                  fontSize: "13px",
+                  lineHeight: 1.6,
                 }}
               >
                 {r.desc}
               </div>
+
+              <div
+                style={{
+                  marginTop: "16px",
+                  color: "#F59E0B",
+                  fontSize: "13px",
+                  fontWeight: 600,
+                }}
+              >
+                Enter Workspace →
+              </div>
             </button>
           ))}
+        </div>
+
+        {/* Features */}
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            flexWrap: "wrap",
+            gap: "24px",
+            marginTop: "40px",
+            color: "#9FC3D7",
+            fontSize: "13px",
+          }}
+        >
+          <div>📱 Installable PWA</div>
+          <div>🔳 QR Member Verification</div>
+          <div>📄 PDF & CSV Export</div>
+          <div>📡 Live Station Feed</div>
         </div>
       </div>
     </div>
