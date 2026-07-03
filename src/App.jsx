@@ -620,40 +620,48 @@ const ROLES = [
   { name:"Ranger", desc:"Patrols, inspections & compliance", icon:ShieldCheck },
   { name:"Fisher", desc:"My profile, vessels & documents", icon:Fish },
 ];
-
 /* ============================== LOGIN ============================== */
+
 function LoginScreen({ onSelect }) {
   return (
-    <div style={{ minHeight:"100vh", background: `linear-gradient(160deg, ${T.deep} 0%, ${T.deepAlt} 55%, ${T.blue} 100%), url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://w3.org id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.02'/%3E%3C/svg%3E")`,
-, display:"flex", alignItems:"center", justifyContent:"center", padding:"40px 18px" }}>
-      <div style={{ width:"100%", maxWidth:940 }}>
-        <div style={{ textAlign:"center", marginBottom:36 }}>
-          <div style={{ display:"inline-flex", alignItems:"center", gap:10, marginBottom:18 }}>
-            <div style={{ width:44, height:44, borderRadius:11, background:T.amber, display:"flex", alignItems:"center", justifyContent:"center" }}><Waves size={22} color={T.deep} /></div>
-            <span style={{ fontFamily:F_MONO, fontSize:12, letterSpacing:"0.18em", color:"#BFE3EE", textTransform:"uppercase" }}>Lake County Fisheries Registry</span>
+    <div style={{ 
+      minHeight: "100vh", 
+      // Solution 1: Gradient with an invisible noise overlay to stop color banding
+      background: `linear-gradient(160deg, ${T.deep} 0%, ${T.deepAlt} 55%, ${T.blue} 100%), url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://w3.org id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.025'/%3E%3C/svg%3E")`,
+      display: "flex", 
+      alignItems: "center", 
+      justifyContent: "center", 
+      padding: "40px 18px" 
+    }}>
+      <div style={{ width: "100%", maxWidth: 940 }}>
+        <div style={{ textAlign: "center", marginBottom: 36 }}>
+          <div style={{ display: "inline-flex", alignItems: "center", gap: 10, marginBottom: 18 }}>
+            <div style={{ width: 44, height: 44, borderRadius: 11, background: T.amber, display: "flex", alignItems: "center", justifyContent:"center" }}><Waves size={22} color={T.deep} /></div>
+            <span style={{ fontFamily: F_MONO, fontSize: 12, letterSpacing: "0.18em", color: "#BFE3EE", textTransform: "uppercase" }}>Lake County Fisheries Registry</span>
           </div>
-          <h1 style={{ fontFamily:F_DISPLAY, fontWeight:700, fontSize:"clamp(28px,4vw,42px)", color:"#fff", margin:0, lineHeight:1.15 }}>One ledger for every fisher,<br/>vessel, patrol and catch.</h1>
-          <p style={{ color:"#9FCBDB", fontFamily:F_BODY, fontSize:14.5, marginTop:14, maxWidth:540, marginInline:"auto" }}>Live registration, QR-verified membership cards, patrol tracking and county-level reporting — all in one platform. Select a role to preview its workspace.</p>
+          <h1 style={{ fontFamily: F_DISPLAY, fontWeight: 700, fontSize: "clamp(28px,4vw,42px)", color: "#fff", margin: 0, lineHeight: 1.15 }}>One ledger for every fisher,<br/>vessel, patrol and catch.</h1>
+          <p style={{ color: "#9FCBDB", fontFamily: F_BODY, fontSize: 14.5, marginTop: 14, maxWidth: 540, marginInline: "auto" }}>Live registration, QR-verified membership cards, patrol tracking and county-level reporting — all in one platform. Select a role to preview its workspace.</p>
         </div>
-        <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit,minmax(160px,1fr))", gap:12 }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(160px,1fr))", gap: 12 }}>
           {ROLES.map(r=>(
-            <button key={r.name} onClick={()=>onSelect(r.name)} style={{ background:"rgba(255,255,255,0.05)", border:"1px solid rgba(255,255,255,0.14)", borderRadius:14, padding:"20px 16px", textAlign:"left", cursor:"pointer", color:"#fff" }} onMouseEnter={e=>e.currentTarget.style.background="rgba(63,198,218,0.16)"} onMouseLeave={e=>e.currentTarget.style.background="rgba(255,255,255,0.05)"}>
+            <button key={r.name} onClick={()=>onSelect(r.name)} style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.14)", borderRadius: 14, padding: "20px 16px", textAlign: "left", cursor: "pointer", color: "#fff" }} onMouseEnter={e=>e.currentTarget.style.background="rgba(63,198,218,0.16)"} onMouseLeave={e=>e.currentTarget.style.background="rgba(255,255,255,0.05)"}>
               <r.icon size={20} color={T.amber} />
-              <div style={{ fontFamily:F_DISPLAY, fontWeight:600, fontSize:15.5, marginTop:14 }}>{r.name}</div>
-              <div style={{ fontFamily:F_BODY, fontSize:12, color:"#9FCBDB", marginTop:5, lineHeight:1.4 }}>{r.desc}</div>
-              <div style={{ marginTop:12, display:"flex", alignItems:"center", gap:4, fontSize:12, color:T.amber, fontFamily:F_BODY, fontWeight:600 }}>Enter workspace <ChevronRight size={14}/></div>
+              <div style={{ fontFamily: F_DISPLAY, fontWeight: 600, fontSize: 15.5, marginTop: 14 }}>{r.name}</div>
+              <div style={{ fontFamily: F_BODY, fontSize: 12, color: "#9FCBDB", marginTop: 5, lineHeight: 1.4 }}>{r.desc}</div>
+              <div style={{ marginTop: 12, display: "flex", alignItems: "center", gap: 4, fontSize: 12, color: T.amber, fontFamily: F_BODY, fontWeight: 600 }}>Enter workspace <ChevronRight size={14}/></div>
             </button>
           ))}
         </div>
-        <div style={{ display:"flex", justifyContent:"center", gap:22, marginTop:34, flexWrap:"wrap" }}>
-          {[["Installable PWA",Smartphone],["QR member verification",QrCode],["PDF & CSV export",FileText],["Live station feed",Activity]].map(([t,Icon])=>(
-            <div key={t} style={{ display:"flex", alignItems:"center", gap:7, color:"#8FC0D3", fontFamily:F_BODY, fontSize:12.5 }}><Icon size={14}/> {t}</div>
+        <div style={{ display: "flex", justifyContent: "center", gap: 22, marginTop: 34, flexWrap: "wrap" }}>
+          {[["Installable PWA", Smartphone], ["QR member verification", QrCode], ["PDF & CSV export", FileText], ["Live station feed", Activity]].map(([t, Icon])=>(
+            <div key={t} style={{ display: "flex", alignItems: "center", gap: 7, color: "#8FC0D3", fontFamily: F_BODY, fontSize: 12.5 }}><Icon size={14}/> {t}</div>
           ))}
         </div>
       </div>
     </div>
   );
 }
+
 
 /* ============================== SHELL ============================== */
 function Sidebar({ role, view, setView, mobileOpen, setMobileOpen, onLogout }) {
