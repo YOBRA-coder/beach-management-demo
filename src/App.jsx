@@ -627,100 +627,44 @@ function LoginScreen({ onSelect }) {
     <div
       style={{
         minHeight: "100vh",
-        background: `
-          radial-gradient(circle at top left, rgba(63,198,218,0.15), transparent 35%),
-          radial-gradient(circle at bottom right, rgba(255,193,7,0.08), transparent 30%),
-          linear-gradient(160deg, ${T.deep} 0%, ${T.deepAlt} 55%, ${T.blue} 100%)
-        `,
+        background: "#0B2239",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        padding: "40px 18px",
-        position: "relative",
-        overflow: "hidden",
+        padding: "40px 20px",
       }}
     >
       <div
         style={{
           width: "100%",
-          maxWidth: 940,
-          position: "relative",
-          zIndex: 2,
+          maxWidth: "900px",
+          textAlign: "center",
         }}
       >
-        <div style={{ textAlign: "center", marginBottom: 36 }}>
-          <div
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: 10,
-              marginBottom: 18,
-            }}
-          >
-            <div
-              style={{
-                width: 44,
-                height: 44,
-                borderRadius: 11,
-                background: T.amber,
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                boxShadow: "0 8px 20px rgba(0,0,0,0.2)",
-              }}
-            >
-              <Waves size={22} color={T.deep} />
-            </div>
+        <h1
+          style={{
+            color: "#fff",
+            fontSize: "42px",
+            marginBottom: "12px",
+          }}
+        >
+          Lake County Fisheries Registry
+        </h1>
 
-            <span
-              style={{
-                fontFamily: F_MONO,
-                fontSize: 12,
-                letterSpacing: "0.18em",
-                color: "#BFE3EE",
-                textTransform: "uppercase",
-              }}
-            >
-              Lake County Fisheries Registry
-            </span>
-          </div>
-
-          <h1
-            style={{
-              fontFamily: F_DISPLAY,
-              fontWeight: 700,
-              fontSize: "clamp(28px,4vw,42px)",
-              color: "#fff",
-              margin: 0,
-              lineHeight: 1.15,
-            }}
-          >
-            One ledger for every fisher,
-            <br />
-            vessel, patrol and catch.
-          </h1>
-
-          <p
-            style={{
-              color: "#9FCBDB",
-              fontFamily: F_BODY,
-              fontSize: 14.5,
-              marginTop: 14,
-              maxWidth: 540,
-              marginInline: "auto",
-            }}
-          >
-            Live registration, QR-verified membership cards, patrol tracking
-            and county-level reporting — all in one platform. Select a role to
-            preview its workspace.
-          </p>
-        </div>
+        <p
+          style={{
+            color: "#B8D4E3",
+            marginBottom: "40px",
+          }}
+        >
+          Select a role to continue
+        </p>
 
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit,minmax(160px,1fr))",
-            gap: 12,
+            gridTemplateColumns: "repeat(auto-fit,minmax(180px,1fr))",
+            gap: "16px",
           }}
         >
           {ROLES.map((r) => (
@@ -728,39 +672,22 @@ function LoginScreen({ onSelect }) {
               key={r.name}
               onClick={() => onSelect(r.name)}
               style={{
-                background: "rgba(255,255,255,0.08)",
-                backdropFilter: "blur(12px)",
-                WebkitBackdropFilter: "blur(12px)",
-                border: "1px solid rgba(255,255,255,0.12)",
-                borderRadius: 16,
-                padding: "20px 16px",
-                textAlign: "left",
-                cursor: "pointer",
+                padding: "20px",
+                borderRadius: "12px",
+                border: "1px solid #2A4A63",
+                background: "#13314D",
                 color: "#fff",
-                transition: "all 0.25s ease",
-                boxShadow: "0 8px 32px rgba(0,0,0,0.18)",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.background =
-                  "rgba(63,198,218,0.16)";
-                e.currentTarget.style.transform =
-                  "translateY(-3px)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background =
-                  "rgba(255,255,255,0.08)";
-                e.currentTarget.style.transform =
-                  "translateY(0px)";
+                cursor: "pointer",
               }}
             >
-              <r.icon size={20} color={T.amber} />
+              <div style={{ marginBottom: "10px" }}>
+                <r.icon size={24} />
+              </div>
 
               <div
                 style={{
-                  fontFamily: F_DISPLAY,
-                  fontWeight: 600,
-                  fontSize: 15.5,
-                  marginTop: 14,
+                  fontWeight: "bold",
+                  marginBottom: "8px",
                 }}
               >
                 {r.name}
@@ -768,64 +695,13 @@ function LoginScreen({ onSelect }) {
 
               <div
                 style={{
-                  fontFamily: F_BODY,
-                  fontSize: 12,
-                  color: "#9FCBDB",
-                  marginTop: 5,
-                  lineHeight: 1.4,
+                  fontSize: "12px",
+                  opacity: 0.8,
                 }}
               >
                 {r.desc}
               </div>
-
-              <div
-                style={{
-                  marginTop: 12,
-                  display: "flex",
-                  alignItems: "center",
-                  gap: 4,
-                  fontSize: 12,
-                  color: T.amber,
-                  fontFamily: F_BODY,
-                  fontWeight: 600,
-                }}
-              >
-                Enter workspace
-                <ChevronRight size={14} />
-              </div>
             </button>
-          ))}
-        </div>
-
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            gap: 22,
-            marginTop: 34,
-            flexWrap: "wrap",
-          }}
-        >
-          {[
-            ["Installable PWA", Smartphone],
-            ["QR member verification", QrCode],
-            ["PDF & CSV export", FileText],
-            ["Live station feed", Activity],
-          ].map(([t, Icon]) => (
-            <div
-              key={t}
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: 7,
-                color: "#8FC0D3",
-                fontFamily: F_BODY,
-                fontSize: 12.5,
-              }}
-            >
-              <Icon size={14} />
-              {t}
-            </div>
           ))}
         </div>
       </div>
