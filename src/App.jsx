@@ -624,7 +624,8 @@ const ROLES = [
 /* ============================== LOGIN ============================== */
 function LoginScreen({ onSelect }) {
   return (
-    <div style={{ minHeight:"100vh", background:`linear-gradient(160deg, ${T.deep} 0%, ${T.deepAlt} 55%, ${T.blue} 100%)`, display:"flex", alignItems:"center", justifyContent:"center", padding:"40px 18px" }}>
+    <div style={{ minHeight:"100vh", background: `linear-gradient(160deg, ${T.deep} 0%, ${T.deepAlt} 55%, ${T.blue} 100%), url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://w3.org id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.02'/%3E%3C/svg%3E")`,
+, display:"flex", alignItems:"center", justifyContent:"center", padding:"40px 18px" }}>
       <div style={{ width:"100%", maxWidth:940 }}>
         <div style={{ textAlign:"center", marginBottom:36 }}>
           <div style={{ display:"inline-flex", alignItems:"center", gap:10, marginBottom:18 }}>
