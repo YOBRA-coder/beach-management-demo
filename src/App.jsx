@@ -42,14 +42,13 @@ const F_DISPLAY = "'Space Grotesk', sans-serif";
 const F_BODY = "'Inter', sans-serif";
 const F_MONO = "'IBM Plex Mono', monospace";
 
+const NET_SVG = `<svg xmlns='http://www.w3.org/2000/svg' width='26' height='26'><path d='M0 26L26 0M-6.5 6.5L6.5 -6.5M19.5 32.5L32.5 19.5' stroke='rgba(255,255,255,0.09)' stroke-width='1'/></svg>`;
 const NET_BG = { backgroundImage: `url("data:image/svg+xml,${encodeURIComponent(NET_SVG)}")`, backgroundSize: "26px 26px", backgroundRepeat: "repeat" };
-//backgroundImage: `repeating-linear-gradient(45deg, rgba(255,255,255,0.06) 0 1px, transparent 1px 14px), repeating-linear-gradient(-45deg, rgba(255,255,255,0.06) 0 1px, transparent 1px 14px)`
 const qrUrl = (text, size=180) => `https://api.qrserver.com/v1/create-qr-code/?size=${size}x${size}&margin=8&color=0A2A3C&bgcolor=ffffff&data=${encodeURIComponent(text)}`;
 
 /* ============================== MOCK DATA ============================== */
 const FIRST = ["Otieno","Achieng","Wanjiru","Njoroge","Mumbi","Kiptoo","Adhiambo","Barasa","Chebet","Odhiambo","Nekesa","Kamau","Wafula","Auma","Kiplagat","Nyambura","Owino","Cherono","Wekesa","Atieno","Juma","Akoth","Were","Nafula"];
 const LAST = ["Onyango","Omondi","Kariuki","Mwangi","Ochieng","Njuguna","Simiyu","Wanyama","Kiprotich","Muthoni","Otieno","Akinyi","Kimani","Odongo","Were","Wafula","Mboya"];
-
 const SUBCOUNTIES = { "Kwale":["Nyando","Kisumu Central","Nyakach"], "Mombasa":["Suba North","Suba South","Rangwe"], "Kilifi":["Bondo","Rarieda"], "Lamu":["Nyatike","Suna East"], "Tana River":["Bunyala","Budalangi"] };
 const BMUS = [
   { name: "Shimoni BMU", county: "Kwale", x: 22, y: 40 }, { name: "Diani BMU", county: "Kwale", x: 27, y: 33 },
@@ -58,12 +57,12 @@ const BMUS = [
   { name: "Watamu BMU", county: "Kilifi", x: 48, y: 24 }, { name: "Malindi BMU", county: "Lamu", x: 55, y: 30 },
   { name: "Faza BMU", county: "Lamu", x: 68, y: 18 }, { name: "Kipini BMU", county: "Tana River", x: 76, y: 14 },
 ];
-const COUNTIES = [...new Set(BMUS.map(b=>b.county))];
 const SPECIES = [
   { name: "Nile Perch", price: 380 }, { name: "Nile Tilapia", price: 320 },
   { name: "Omena (Silver Cyprinid)", price: 180 }, { name: "African Catfish", price: 260 },
   { name: "Mudfish", price: 210 },
 ];
+const COUNTIES = [...new Set(BMUS.map(b=>b.county))];
 const GEAR = ["Gillnet","Longline","Beach Seine","Cast Net","Fish Trap"];
 const VESSEL_TYPES = ["Wooden Canoe","Fibreglass Boat","Motorized Boat","Trawler"];
 const DOC_TYPES = ["National ID","Fishing License","Coxswain Certificate","Vessel Registration Certificate","Payment Receipt","Other Supporting Record"];
@@ -628,7 +627,7 @@ const ROLES = [
 function LoginScreen({ onSelect }) {
   return (
     <div style={{ minHeight:"100vh", background:`linear-gradient(160deg, ${T.deep} 0%, ${T.deepAlt} 55%, ${T.blue} 100%)`, display:"flex", alignItems:"center", justifyContent:"center", padding:"40px 18px", position:"relative", overflow:"hidden" }}>
-      <div style={{ position:"absolute", inset:0, ...NET_BG }} />
+      <div style={{ position:"absolute", inset:0, pointerEvents:"none", transform:"translateZ(0)", WebkitBackfaceVisibility:"hidden", backfaceVisibility:"hidden", ...NET_BG }} />
       <div style={{ position:"absolute", top:-120, right:-100, width:360, height:360, borderRadius:"50%", background:"radial-gradient(circle, rgba(63,198,218,0.28), transparent 70%)" }} />
       <div style={{ position:"absolute", bottom:-140, left:-80, width:320, height:320, borderRadius:"50%", background:"radial-gradient(circle, rgba(227,169,59,0.16), transparent 70%)" }} />
       <div style={{ width:"100%", maxWidth:940, position:"relative", zIndex:1 }}>
@@ -1199,6 +1198,11 @@ function AppShell({ role, setRole }) {
 /* ============================== APP ============================== */
 export default function App() {
   const [role, setRole] = useState(null);
-  if (!role) return (<><style>{FONT_IMPORT}</style><LoginScreen onSelect={setRole} /></>);
+  if (!role) return (
+    <>
+      <style>{`${FONT_IMPORT} * { box-sizing:border-box; } html,body { margin:0; overflow-x:hidden; -webkit-text-size-adjust:100%; }`}</style>
+      <LoginScreen onSelect={setRole} />
+    </>
+  );
   return (<ToastProvider><AppShell role={role} setRole={setRole} /></ToastProvider>);
 }
